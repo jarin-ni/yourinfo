@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+    .card {
+      background: rgba(255,255,255,0.12);
+      padding: 40px;
+      border-radius: 15px;
+      width: 420px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    h1 {
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+    p {
+      font-size: 16px;
+      margin: 8px 0;
+    }
+    .label {
+      font-weight: bold;
+      color: #ffd369;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h1>👋 Welcome to You</h1>
+  <p><span class="label">IP Address:</span> <span id="ip">Loading...</span></p>
+  <p><span class="label">Location:</span> <span id="location">Loading...</span></p>
+  <p><span class="label">Date & Time:</span> <span id="datetime"></span></p>
+</div>
+
+<script>
+  // Date & Time
+  function updateTime() {
+    const now = new Date();
+    document.getElementById("datetime").innerText = now.toLocaleString();
+  }
+  updateTime();
+  setInterval(updateTime, 1000);
+
+  // IP + Location
+  fetch("https://ipapi.co/json/")
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("ip").innerText = data.ip;
+      document.getElementById("location").innerText =
+        data.city + ", " + data.region + ", " + data.country_name;
+    })
+    .catch(() => {
+      document.getElementById("ip").innerText = "Unavailable";
+      document.getElementById("location").innerText = "Unavailable";
+    });
+</script>
+
+</body>
+</html>
+
