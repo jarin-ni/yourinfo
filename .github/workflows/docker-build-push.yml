@@ -1,11 +1,12 @@
-name: Build and Push Docker Image
+name: Build and Push to Docker Hub
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - master
 
 jobs:
-  build:
+  docker:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,9 +19,13 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push
+      - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/welcome-page:latest
+          tags: |
+            smileshosting/yourinfo:latest
+
+      - name: Logout from Docker Hub
+        run: docker logout
 
