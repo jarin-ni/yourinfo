@@ -3,27 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <title>Welcome</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="card">
-  <h1>👋 Welcome to You to Your Page</h1>
+<div class="page">
+  <div class="card">
+    <h1>👋 Welcome to You to Your Page</h1>
 
-  <p><span class="label">IP Address:</span> <span id="ip">Loading...</span></p>
-  <p><span class="label">Location:</span> <span id="location">Loading...</span></p>
-  <p><span class="label">Date & Time:</span> <span id="datetime"></span></p>
+    <p><span class="label">IP Address:</span> <span id="ip">Loading...</span></p>
+    <p><span class="label">IPv4 Address:</span> <span id="ipv4">Loading...</span></p>
+    <p><span class="label">Location:</span> <span id="location">Loading...</span></p>
+    <p><span class="label">Date & Time:</span> <span id="datetime"></span></p>
 
-  <div class="nav">
-    <a href="map.html">📍 View Map</a>
+    <div class="nav">
+      <a href="map.html">📍 View Map</a>
+    </div>
   </div>
+
+  <footer class="footer">
+    © <span id="year"></span> SmilesHosting. All rights reserved.
+  </footer>
 </div>
 
-<footer class="footer">
-  © <span id="year"></span> SmilesHosting. All rights reserved.
-</footer>
-
 <script>
+  // Live date & time
   function updateTime() {
     document.getElementById("datetime").innerText =
       new Date().toLocaleString();
@@ -31,6 +36,7 @@
   updateTime();
   setInterval(updateTime, 1000);
 
+  // Fetch main IP + location (IPv6 or IPv4)
   fetch("https://ipapi.co/json/")
     .then(res => res.json())
     .then(data => {
@@ -38,7 +44,7 @@
       document.getElementById("location").innerText =
         data.city + ", " + data.region + ", " + data.country_name;
 
-      // store for map page
+      // Save for map page
       localStorage.setItem("lat", data.latitude);
       localStorage.setItem("lon", data.longitude);
     })
@@ -46,6 +52,19 @@
       document.getElementById("ip").innerText = "Unavailable";
       document.getElementById("location").innerText = "Unavailable";
     });
+
+  // Fetch IPv4 specifically
+  fetch("https://api.ipify.org?format=json")
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("ipv4").innerText = data.ip;
+    })
+    .catch(() => {
+      document.getElementById("ipv4").innerText = "Unavailable";
+    });
+
+  // Footer year
+  document.getElementById("year").innerText = new Date().getFullYear();
 </script>
 
 </body>

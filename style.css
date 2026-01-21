@@ -1,59 +1,73 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+}
+
+/* Body */
 body {
   margin: 0;
-  height: 100vh;
-  font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2a33, #1f3f4a);
+  font-family: Arial, sans-serif;
+}
+
+/* Page layout */
+.page {
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  color: #fff;
+  justify-content: center;
+  position: relative;
 }
 
+/* Card */
 .card {
-  background: rgba(255,255,255,0.12);
-  padding: 40px;
-  border-radius: 15px;
-  width: 420px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 30px 40px;
+  border-radius: 16px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  color: #fff;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  max-width: 90%;
 }
 
-h1 {
+/* Headline */
+.card h1 {
   margin-bottom: 20px;
-  font-size: 28px;
 }
 
-p {
-  font-size: 16px;
-  margin: 8px 0;
-}
-
+/* Labels */
 .label {
+  color: #ffd166;
   font-weight: bold;
-  color: #ffd369;
 }
 
-.nav {
-  margin-top: 25px;
-}
-
+/* Button */
 .nav a {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 22px;
+  background: #ffd166;
+  color: #000;
+  border-radius: 25px;
   text-decoration: none;
-  background: #ffd369;
-  color: #203a43;
-  padding: 10px 18px;
-  border-radius: 20px;
-  margin: 0 5px;
   font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .nav a:hover {
-  background: #ffbe33;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
+
+/* Footer */
 .footer {
-  margin-top: 20px;
+  position: absolute;
+  bottom: 20px;
   text-align: center;
-  font-size: 0.85em;
-  color: #777;
+  color: #ddd;
+  font-size: 0.85rem;
 }
 
