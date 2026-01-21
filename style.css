@@ -50,4 +50,10 @@ p {
 .nav a:hover {
   background: #ffbe33;
 }
+.footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.85em;
+  color: #777;
+}
 
